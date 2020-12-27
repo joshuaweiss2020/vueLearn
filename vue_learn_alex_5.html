@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="vue.js" type="text/javascript" charset="UTF-8" ></script>
+	</head>
+	<body>
+		<div id="app">
+			{{name}}
+			<br>
+			by Method:{{msgDate}}
+			<br>
+			<button @click="get_date('m')">get_date by Method</button>
+			<br>
+			by computed:{{getMsg}}
+			<br>
+			<button @click="get_date('c')">get_date by computed</button>
+			<br>
+			<alex-com title="alex" @click_fun1="click_fun"></alex-com>
+			<br>
+			<alex-com title="queena"></alex-com>		
+				<br>
+
+		</div>
+		<script type="text/javascript">
+			Vue.component("alex-com",{
+				props:["title"],
+				data: function(){
+					return {
+						count: 0
+					}
+				},
+				template:"<div><h1><button v-on:click='click1'>{{title}} add {{count}}</button></h1></div>",
+				methods:{
+					click1:function(){
+						this.count+=1
+						this.$emit("click_fun1",this.count)
+					}
+				}
+			}
+				
+			)
+
+			var  vm= new Vue({
+				el: "#app",
+				data: {
+					name:"alex",
+					msgDate:Date.now()
+				},
+				
+				methods: {
+					click_fun:function(e){
+						console.log(e)
+						this.name="Queena " + e
+						 
+							},
+					get_date:function(flag){
+						if (flag=='m')
+							this.msgDate=Date.now()
+						if (flag=='c')
+							this.msgDate=this.getMsg
+					}
+						},
+				computed: {
+					getMsg:function(){
+						// return this.name.split('').reverse().join('')
+						return Date.now()
+					}	
+				}
+				
+			})
+			console.log(vm.getMsg)
+
+			
+		</script>		
+	</body>
+</html>

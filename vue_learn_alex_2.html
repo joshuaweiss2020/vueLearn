@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="vue.js" type="text/javascript" charset="UTF-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			{{name}}
+		</div>
+		<script type="text/javascript">
+			var data={name:"alex"}
+			var vm = new Vue({
+				el:"#app",
+				data:data,
+				beforeCreate:function(){
+					console.log("beforeCreate.....",this.$el)
+				},
+				created:function(){
+					console.log("created")
+					console.log(this.name)
+				},
+				
+				beforeMount : function(){
+					console.log('beforeMount');
+					console.log(this.name)
+					},
+				mounted:function(){
+					console.log("mounted..")
+				}
+				
+			})
+			setTimeout(function() {
+				vm.name="Queena"
+			},3000)
+		</script>
+	</body>
+	
+</html>

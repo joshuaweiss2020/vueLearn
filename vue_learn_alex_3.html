@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="vue.js" type="text/javascript" charset="UTF-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<p v-html="htmlSpan"></p>
+			<p>{{fSize?0:9}}</p>
+			<p>{{0==1}}</p>
+			<p v-bind:class="fSize">{{name}}</p>
+			<p class="big">Hello</p>
+			<a v-bind:href="url">href</a>
+			<div @click="click1">
+				click1
+				 <div @click.stop="click2">
+					 click2
+				 </div>
+				</div>
+		</div>
+	<script type="text/javascript">
+		var data = {name:"Morning",b:2}
+		var app = new Vue({
+			el: "#app",
+			data: {
+			name:"morning",
+			htmlSpan: "<span style='color:red'>hello</span>",
+			fSize:"big",
+			url:"http://www.baidu.com"
+			},
+			methods:{
+				click1:function(){
+					this.$data.fSize="small"
+					this.$data.name="NO"
+				}, 
+				click2:function(){
+					this.$data.fSize="big"
+					this.$data.name="YES"
+					
+				}
+			}
+		})
+		
+	</script>
+	<style type="text/css">
+		.big{font-size: 100px;}
+		.small{font-size:50px;}
+	</style>
+	</body>
+</html>

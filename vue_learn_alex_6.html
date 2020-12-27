@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="vue.js" type="text/javascript" charset="UTF-8" ></script>
+	</head>
+	<body>
+		<div id="example">
+			<p>Original message: "{{ message }}"</p>
+			<p>Computed reversed message: "{{ reversedMessage }}"</p>
+			<p>My message: "{{ getMsg }}"</p>
+			<p>My fullname: "{{ get_fullname }}"</p>
+			<p>fullname:	{{fullname}}</p>
+		</div>
+
+    <script type="text/javascript">
+      var vm = new Vue({
+        el: '#example',
+        data: {
+          message: 'Hello'
+        },
+	
+        computed: {
+          // 计算属性的 getter
+          reversedMessage: function () {
+      // `this` 指向 vm 实例
+	  return "msg"
+		//	return this.message.split('').reverse().join('')
+    },
+		getMsg: function(){
+			
+			return "msg"
+		},
+		get_fullname:function(){
+			return this.message + " fullname"
+			
+		},
+		fullname:{
+			get: function(){
+				return "getFullname:" + this.message
+			},
+			set: function(newVal){
+				this.message = newVal
+			}
+		}
+  },
+		watch:{
+			message:function(newVal,oldVal)	{
+				console.log("oldVal:",oldVal)
+				console.log("newVal:",newVal)
+				
+			}
+			
+		}
+})		
+	console.log(vm.getMsg)	
+	vm.message="hi"
+	setTimeout(function(){vm.message="123"},2000)
+	setTimeout(function(){vm.fullname="456"},4000)
+	</script>
+	<br>
+
+	</body>
+</html>
